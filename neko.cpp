@@ -5,7 +5,7 @@
 #include <utility> 
 #include <vector>
 #include <ctime>
-#include <unordered_map>
+//#include <unordered_map>
 
 using namespace std;
 
@@ -15,7 +15,10 @@ void help(string&, int);
 void ans(int);
 
 vector<pair<string, vector<string>>> hiragana{};
+vector<int> nums = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70};
+
 //unordered_map<string, vector<string>> hiragana;
+int num = 0;
 
 
 int main(int argc, char** argv)
@@ -28,22 +31,22 @@ int main(int argc, char** argv)
 	{
 		bool is_correct = false;
 		
-		srand(time(NULL));
-		int num = (int)rand() % (int)hiragana.size();
+		//srand(time(NULL));
+		//int num = (int)rand() % (int)hiragana.size();
 		
-		cout << "\n" << hiragana[num].first << "\n\n";
+		cout << "\n" << hiragana[nums[num]].first << "\n\n";
 		cin >> in;
 		
 		while(!is_correct)
 		{
 			if(in == "ans")
 			{
-				ans(num);
+				ans(nums[num]);
 				break;
 			}
 			else if(in == "help")
 			{
-				help(in, num);
+				help(in, nums[num]);
 			}
 			else if(in == "exit" || in == "quit" || in == "q")
 			{
@@ -51,9 +54,9 @@ int main(int argc, char** argv)
 			}
 			else
 			{
-				for(int x = 0; x < hiragana[num].second.size(); ++x)
+				for(int x = 0; x < hiragana[nums[num]].second.size(); ++x)
 				{
-					if(hiragana[num].second[x] == in)
+					if(hiragana[nums[num]].second[x] == in)
 					{
 						is_correct = true;
 						break;
@@ -61,13 +64,21 @@ int main(int argc, char** argv)
 				}
 				if(!is_correct)
 				{
-					inc(in, num);
+					inc(in, nums[num]);
 				}
 			}
 		}
 		if(in != "exit" && in != "quit" && in != "q" && in != "ans")
 		{
 			cout << "\n\nHai!\n";
+		}
+
+		num++;
+		if(num == hiragana.size())
+		{
+			cout << "Omedetou gozaimasu! You made it through all 71 hiragana!\n\nRe-shuffling the list...\n";
+			num = 0;
+			random_shuffle(nums.begin(), nums.end());
 		}
 
 		cout << "\nNext hiragana: \n";
@@ -168,6 +179,11 @@ void init()
 
 	cout << "\n\nPractice Hiragana! type \"q\", \"quit\", or \"exit\" to quit, or \"help\" for a reference list. If you want to reveal the answer, type \"ans\"" << "\n" << "Ganbatte!\n\n";
 
+	random_shuffle(nums.begin(), nums.end());
+	/*for(int i = 0; i < nums.size(); ++i)
+	{
+		cout << nums[i] << ", ";
+	}*/
 }
 
 void inc(string& input, int num)
