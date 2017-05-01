@@ -9,7 +9,9 @@
 
 using namespace std;
 
+void init();
 void inc(string&, int);
+void help(string&, int);
 
 vector<pair<string, vector<string>>> hiragana{};
 //unordered_map<string, vector<string>> hiragana;
@@ -18,6 +20,76 @@ vector<pair<string, vector<string>>> hiragana{};
 int main(int argc, char** argv)
 {
 
+	init();
+
+	string in;
+	while(in != "exit" && in != "quit" && in != "q")
+	{
+		bool is_correct = false;
+		
+		srand(time(NULL));
+		int num = rand() % hiragana.size();
+		
+		cout << "\n" << hiragana[num].first << "\n\n";
+		cin >> in;
+		
+		while(!is_correct)
+		{
+			if(in == "ans")
+			{
+				cout << "\nThe answer is: " << hiragana[num].first << " = ";
+				for(int x = 0; x < hiragana[num].second.size(); ++x)
+				{
+					cout << hiragana[num].second[x];
+
+					if(x != (hiragana[num].second.size() - 1))
+					{
+						cout << " or ";
+					}
+					else
+					{
+						cout << "\n\n";
+					}
+				}
+				break;
+			}
+			else if(in == "help")
+			{
+				help(in, num);
+			}
+			else if(in == "exit" || in == "quit" || in == "q")
+			{
+				break;
+			}
+			else
+			{
+				for(int x = 0; x < hiragana[num].second.size(); ++x)
+				{
+					if(hiragana[num].second[x] == in)
+					{
+						is_correct = true;
+						break;
+					}
+				}
+				if(!is_correct)
+				{
+					inc(in, num);
+				}
+			}
+		}
+		if(in != "exit" && in != "quit" && in != "q" && in != "ans")
+		{
+			cout << "\n\nHai!\n";
+		}
+
+		cout << "\nNext hiragana: \n";
+	}
+
+	cout << "\nOtsukaresama deshita! Sayonara! Nyaaaa~\n\n";
+}
+
+void init()
+{
 	hiragana.push_back(make_pair("あ", vector<string> {"a"}));
 	hiragana.push_back(make_pair("え", vector<string> {"e"}));
 	hiragana.push_back(make_pair("い", vector<string> {"i"}));
@@ -106,100 +178,41 @@ int main(int argc, char** argv)
 	hiragana.push_back(make_pair("し", vector<string> {"shi", "si"}));
 	hiragana.push_back(make_pair("つ", vector<string> {"tsu", "tu"}));
 
+	cout << "\n\nPractice Hiragana! type \"q\", \"quit\", or \"exit\" to quit, or \"help\" for a reference list. If you want to reveal the answer, type \"ans\"" << "\n" << "Ganbatte!\n\n";
 
-	cout << "\n\nPractice Hiragana, type \"q\", \"quit\", or \"exit\" to quit, or \"help\" for a reference list. If you want to reveal the answer, type \"ans\"" << "\n" << "Ganbatte!\n\n";
-	string in;
-	while(in != "exit" && in != "quit" && in != "q")
-	{
-		bool is_correct = false;
-		srand(time(NULL));
-		int num = rand() % hiragana.size();
-		cout << "\n" << hiragana[num].first << "\n\n";
-		cin >> in;
-		while(!is_correct)
-		{
-			if(in == "ans")
-			{
-				cout << "\nThe answer is: " << hiragana[num].first << " = ";
-				for(int x = 0; x < hiragana[num].second.size(); ++x)
-				{
-					cout << hiragana[num].second[x];
-
-					if(x != (hiragana[num].second.size() - 1))
-					{
-						cout << " or ";
-					}
-					else
-					{
-						cout << "\n\n";
-					}
-				}
-				break;
-			}
-			else if(in == "help")
-			{
-				for(int i = 0; i < hiragana.size(); ++i)
-				{
-					cout << hiragana[i].first << " = ";
-
-					for(int x = 0; x < hiragana[i].second.size(); ++x)
-					{
-						cout << hiragana[i].second[x];
-
-						if(x != (hiragana[i].second.size() - 1))
-						{
-							cout << ", ";
-						}
-						else
-						{
-							cout << "		";
-						}
-					}
-					if(i % 5 == 4)
-					{
-						cout << "\n";
-					}
-				}
-
-				cout << "\n\nTry again\n\n" << hiragana[num].first << "\n\n";
-				cin >> in;
-			}
-			else if(in == "exit" || in == "quit" || in == "q")
-			{
-				break;
-			}
-			else
-			{
-				for(int x = 0; x < hiragana[num].second.size(); ++x)
-				{
-					if(hiragana[num].second[x] == in)
-					{
-						is_correct = true;
-						break;
-					}
-				}
-				if(!is_correct)
-				{
-					inc(in, num);
-				}
-			}
-		}
-		if(in == "ans")
-		{
-			cout << "\nNext hiragana: \n";
-		}
-		else if(in != "exit" && in != "quit" && in != "q")
-		{
-			cout << "\n\nHai!\n\n";
-		}
-	}
-
-	cout << "\nOtsukaresama deshita! Sayonara! Nyaaaa~\n\n";
 }
 
 void inc(string& input, int num)
 {
 	cout << "\nChigau, pls try again" << "\n\n";
 	cout << "\n" << hiragana[num].first << "\n\n";
+	cin >> input;
+}
+
+void help(string& input, int num)
+{
+	for(int i = 0; i < hiragana.size(); ++i)
+	{
+		cout << hiragana[i].first << " = ";
+
+		for(int x = 0; x < hiragana[i].second.size(); ++x)
+		{
+			cout << hiragana[i].second[x];
+
+			if(x != (hiragana[i].second.size() - 1))
+			{
+				cout << ", ";
+			}
+			else
+			{
+				cout << "		";
+			}
+		}
+		if(i % 5 == 4)
+		{
+			cout << "\n";
+		}
+	}
+	cout << "\n\nTry again\n\n" << hiragana[num].first << "\n\n";
 	cin >> input;
 }
