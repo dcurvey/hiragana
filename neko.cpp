@@ -12,6 +12,7 @@ using namespace std;
 void init();
 void inc(string&, int);
 void help(string&, int);
+void ans(int);
 
 vector<pair<string, vector<string>>> hiragana{};
 //unordered_map<string, vector<string>> hiragana;
@@ -28,7 +29,7 @@ int main(int argc, char** argv)
 		bool is_correct = false;
 		
 		srand(time(NULL));
-		int num = rand() % hiragana.size();
+		int num = (int)rand() % (int)hiragana.size();
 		
 		cout << "\n" << hiragana[num].first << "\n\n";
 		cin >> in;
@@ -37,20 +38,7 @@ int main(int argc, char** argv)
 		{
 			if(in == "ans")
 			{
-				cout << "\nThe answer is: " << hiragana[num].first << " = ";
-				for(int x = 0; x < hiragana[num].second.size(); ++x)
-				{
-					cout << hiragana[num].second[x];
-
-					if(x != (hiragana[num].second.size() - 1))
-					{
-						cout << " or ";
-					}
-					else
-					{
-						cout << "\n\n";
-					}
-				}
+				ans(num);
 				break;
 			}
 			else if(in == "help")
@@ -215,4 +203,22 @@ void help(string& input, int num)
 	}
 	cout << "\n\nTry again\n\n" << hiragana[num].first << "\n\n";
 	cin >> input;
+}
+
+void ans(int num)
+{
+	cout << "\nThe answer is: " << hiragana[num].first << " = ";
+	for(int x = 0; x < hiragana[num].second.size(); ++x)
+	{
+		cout << hiragana[num].second[x];
+
+		if(x != (hiragana[num].second.size() - 1))
+		{
+			cout << " or ";
+		}
+		else
+		{
+			cout << "\n\n";
+		}
+	}
 }
