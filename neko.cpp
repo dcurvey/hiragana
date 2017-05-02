@@ -139,9 +139,10 @@ void init()
 
 	hiragana.push_back(make_pair("は", vector<string> {"ha"}));
 	hiragana.push_back(make_pair("ひ", vector<string> {"hi"}));
-	hiragana.push_back(make_pair("ふ", vector<string> {"hu"}));
+	hiragana.push_back(make_pair("ふ", vector<string> {"hu", "fu"}));
 	hiragana.push_back(make_pair("へ", vector<string> {"he"}));
 	hiragana.push_back(make_pair("ほ", vector<string> {"ho"}));
+
 
 	hiragana.push_back(make_pair("ま", vector<string> {"ma"}));
 	hiragana.push_back(make_pair("み", vector<string> {"mi"}));
