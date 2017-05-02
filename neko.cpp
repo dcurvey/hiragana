@@ -28,10 +28,12 @@ int main(int argc, char** argv)
 
 	init();
 
+	int num_correct = 0;
 	string in;
 	while(in != "exit" && in != "quit" && in != "q")
 	{
 		bool is_correct = false;
+		bool used_help = false;
 		
 		//int num = (int)rand() % (int)hiragana.size();
 		
@@ -43,11 +45,13 @@ int main(int argc, char** argv)
 			if(in == "ans")
 			{
 				ans(nums[num]);
+				used_help = true;
 				break;
 			}
 			else if(in == "help")
 			{
 				help(in, nums[num]);
+				used_help = true;
 			}
 			else if(in == "exit" || in == "quit" || in == "q")
 			{
@@ -60,6 +64,10 @@ int main(int argc, char** argv)
 					if(hiragana[nums[num]].second[x] == in)
 					{
 						is_correct = true;
+						if(!used_help)
+						{
+							num_correct++;
+						}
 						break;
 					}
 				}
@@ -77,7 +85,7 @@ int main(int argc, char** argv)
 		num++;
 		if(num == hiragana.size())
 		{
-			cout << "Omedetou gozaimasu! You made it through all 71 hiragana!\n\nRe-shuffling the list...\n";
+			cout << "Omedetou gozaimasu! You made it through all 71 hiragana!\nYou got " << num_correct << "/71 correct without help.\n\nRe-shuffling the list...\n";
 			num = 0;
 
 			srand(time(NULL));
