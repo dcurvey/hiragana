@@ -29,11 +29,14 @@ int main(int argc, char** argv)
 	init();
 
 	int num_correct = 0;
+	int num_first = 0;
 	string in;
 	while(in != "exit" && in != "quit" && in != "q")
 	{
 		bool is_correct = false;
 		bool used_help = false;
+		bool first_try = true;
+		//int try_num = 1;
 		
 		//int num = (int)rand() % (int)hiragana.size();
 		
@@ -67,6 +70,10 @@ int main(int argc, char** argv)
 						if(!used_help)
 						{
 							num_correct++;
+							if(first_try)
+							{
+								num_first++;
+							}
 						}
 						break;
 					}
@@ -74,6 +81,10 @@ int main(int argc, char** argv)
 				if(!is_correct)
 				{
 					inc(in, nums[num]);
+					if(first_try)
+					{
+						first_try = false;
+					}
 				}
 			}
 		}
@@ -85,8 +96,10 @@ int main(int argc, char** argv)
 		num++;
 		if(num == hiragana.size())
 		{
-			cout << "Omedetou gozaimasu! You made it through all 71 hiragana!\nYou got " << num_correct << "/71 correct without help.\n\nRe-shuffling the list...\n";
+			cout << "Omedetou gozaimasu! You made it through all 71 hiragana!\nYou got " << num_correct << "/71 correct without help, and " << num_first << "/71 on your first try.\n\nRe-shuffling the list...\n";
 			num = 0;
+			num_correct = 0;
+			num_first = 0;
 
 			srand(time(NULL));
 			random_shuffle(nums.begin(), nums.end(), rand_func);
