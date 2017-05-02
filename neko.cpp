@@ -5,7 +5,6 @@
 #include <utility> 
 #include <vector>
 #include <ctime>
-//#include <unordered_map>
 
 using namespace std;
 
@@ -17,15 +16,11 @@ int rand_func(int);
 
 vector<pair<string, vector<string>>> hiragana{};
 vector<int> nums = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70};
-
-//unordered_map<string, vector<string>> hiragana;
 int num = 0;
-
 
 int main(int argc, char** argv)
 {
 	srand(time(NULL));
-
 	init();
 
 	int num_correct = 0;
@@ -36,10 +31,7 @@ int main(int argc, char** argv)
 		bool is_correct = false;
 		bool used_help = false;
 		bool first_try = true;
-		//int try_num = 1;
-		
-		//int num = (int)rand() % (int)hiragana.size();
-		
+				
 		cout << "\n" << hiragana[nums[num]].first << "\n\n";
 		cin >> in;
 		
@@ -204,10 +196,6 @@ void init()
 	cout << "\n\nPractice Hiragana! type \"q\", \"quit\", or \"exit\" to quit, or \"help\" for a reference list. If you want to reveal the answer, type \"ans\"" << "\n" << "Ganbatte!\n\n";
 
 	random_shuffle(nums.begin(), nums.end(), rand_func);
-	/*for(int i = 0; i < nums.size(); ++i)
-	{
-		cout << nums[i] << ", ";
-	}*/
 }
 
 void inc(string& input, int num)
