@@ -105,7 +105,7 @@ int main(int argc, char** argv)
 		cout << "\nNext hiragana: \n";
 	}
 
-	cout << "\nOtsukaresama deshita! Sayonara! Nyaaaa~\n\n";
+	cout << "\nOtsukaresama deshita! Sayonara!\n\n";
 }
 
 void init()
