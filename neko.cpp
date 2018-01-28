@@ -93,7 +93,7 @@ int main(int argc, char** argv)
 		num++;
 		if(num == hiragana.size())
 		{
-			cout << setprecision(1) << "Omedetou gozaimasu! You made it through all 71 hiragana!\nYou got " << num_correct << "/71 (" << (double)num_correct/71.0 << "%) correct without help, and " << num_first << "/71 (" << (double)num_first/71.0 << "%) on your first try.\n\nRe-shuffling the list...\n";
+			cout << fixed << setprecision(1) << "Omedetou gozaimasu! You made it through all 71 hiragana!\nYou got " << num_correct << "/71 (" << (num_correct * 100)/(71.0) << "%) correct without help, and " << num_first << "/71 (" << ((double)num_first * 100)/(71.0) << "%) on your first try.\n\nRe-shuffling the list...\n";
 			num = 0;
 			num_correct = 0;
 			num_first = 0;
